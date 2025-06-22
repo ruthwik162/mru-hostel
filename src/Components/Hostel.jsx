@@ -9,15 +9,15 @@ const Hostel = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-1/2"> {/* Centering the content */}
+    <div className="flex items-center justify-center py-15  min-h-1/2"> {/* Centering the content */}
             <div
-        className={`bg-white items-center justify-center rounded-2xl shadow-xl p-8 sm:p-10 md:p-12 lg:p-10 max-w-4xl text-gray-700 text-lg leading-relaxed transform transition-all duration-1000 ease-out
+        className={`bg-white items-center justify-center rounded-2xl shadow-xl p-8 sm:p-10 md:p-12 lg:p-10 max-w-7xl text-gray-700 text-lg leading-relaxed transform transition-all duration-1000 ease-out
         ${animate ? 'translate-x-0 scale-100 opacity-100' : '-translate-x-24 scale-90 opacity-0'}`}
       >
-        <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-indigo-600 tracking-wide">
+        <h2 className="text-3xl sm:text-4xl text-center font-bold mb-6 text-indigo-600 tracking-wide">
           Hostel Overview
         </h2>
-        <p className="tracking-normal text-base sm:text-lg">
+        <p className="tracking-normal text-[3vw] md:text-[1vw] sm:text-lg">
           Malla Reddy University hostel is a home away from home for the students.
           Separate Hostel Buildings for Girls & Boys are available. Malla Reddy University Hostels
           have all the required facilities for the students to have a comfortable stay and a family

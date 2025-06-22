@@ -19,12 +19,12 @@ const Hero = () => {
   };
 
   return (
-    <div className='flex flex-col text-white p-30 justify-center items-start px-6 md:px-6 lg:px-24 xl:px-34 bg-[url("/src/assets/heroMru.jpg")] bg-cover bg-no-repeat w-screen h-screen'>
-      <div className={`h-[580px] w-full max-w-4xl mx-auto transition-all duration-1000 ease-out 
+    <div className='flex flex-col md:py-10 py-20 text-white p-30 justify-center items-start px-6 md:px-6 lg:px-24 xl:px-34 bg-[url("/src/assets/heroMru.jpg")] bg-cover bg-no-repeat w-screen h-screen'>
+      <div className={`h-[580px] w-full max-w-5xl mx-auto transition-all duration-1000 ease-out 
           ${animate ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} 
           flex flex-col items-center border-2 rounded-2xl bg-orange-500/85 justify-center px-4 text-center`}
       >
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6 border border-white-500/30 rounded-full bg-gray-300/15 pl-4 p-1 text-sm text-white-800 max-w-full z-0">
+        <div className="flex flex-row items-center justify-center gap-2.5 mb-6 border border-white-500/30 rounded-full bg-gray-300/15 pl-4 p-1 text-[1w]  text-white-800 max-w-full z-0">
           <p>Launching our new platform update.</p>
           <div className="flex items-center cursor-pointer gap-2 bg-indigo-400 border border-gray-500/30 rounded-2xl px-3 py-1 whitespace-nowrap">
             <p>Explore</p>

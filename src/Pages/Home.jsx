@@ -8,7 +8,7 @@ import Hostel from '../Components/Hostel'
 
 const Home = () => {
   return (
-    <div className='fade-in'>
+    <div className=''>
       <Hero />
       <Hostel />
       <PriceCategory />

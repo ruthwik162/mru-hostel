@@ -68,7 +68,7 @@ const Navbar = () => {
                 <img className="h-15 rounded w-22" src={assets.mrulogo} alt="logo" />
             </NavLink>
 
-            <h1 onClick={() => navigate("/")} className="text-2xl cursor-pointer sm:text-2xl md:text-2xl md:gap-6 font-bold max-w-2xl text-white">
+            <h1 onClick={() => navigate("/")} className="hidden md:block cursor-pointer sm:text-2xl md:text-2xl md:gap-6 font-bold max-w-2xl text-white">
                 MallaReddy University
             </h1>
 
