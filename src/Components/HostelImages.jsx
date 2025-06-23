@@ -18,8 +18,8 @@ const HostelImages = () => {
 
   return (
 
-    <section className=" min-h-full  bg-white overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-90 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
+    <section className=" min-h-full   bg-white overflow-hidden">
+      <div className="absolute top-0 pb-50 left-0 w-full h-90 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
 
       <div className="relative overflow-hidden">
         {/* Hero Section with Parallax Effect */}
@@ -96,7 +96,7 @@ const HostelImages = () => {
 
 
             {/* Dining Halls Section */}
-            <div className="space-y-16 text-[3vw] md:text-[1vw]">
+            <div className="space-y-16 pb-5 text-[3vw] md:text-[1vw]">
               {/* Girls' Dining Hall */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}

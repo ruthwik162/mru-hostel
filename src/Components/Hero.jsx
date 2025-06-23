@@ -13,8 +13,7 @@ const Hero = () => {
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.2,
-        duration: 0.6,
+        duration: 0.2,
         when: "beforeChildren",
         staggerChildren: 0.2
       }
@@ -67,8 +66,7 @@ const Hero = () => {
           <div className="md:w-1/2 md:pl-8">
             {/* Enhanced Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium text-white transition-all duration-300 bg-indigo-800/70 rounded-full hover:bg-indigo-900/80 shadow-md"
-              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-2 px-30 py-2 mb-6 text-sm font-medium text-white transition-all justify-around duration-300 bg-indigo-800/70 rounded-full hover:bg-indigo-900/80 shadow-md"
               variants={itemVariants}
             >
               <span className="text-indigo-100">New platform update available</span>
