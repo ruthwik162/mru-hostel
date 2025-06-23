@@ -1,33 +1,87 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { FaWifi, FaUtensils, FaBook, FaShieldAlt, FaTshirt, FaBed } from 'react-icons/fa';
 
 const Hostel = () => {
-  const [animate, setAnimate] = useState(false);
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  };
 
-  useEffect(() => {
-    const timer = setTimeout(() => setAnimate(true), 100); // Delay animation by 100ms
-    return () => clearTimeout(timer); // Cleanup
-  }, []);
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1
+    }
+  };
+
+  const features = [
+    { icon: <FaWifi className="text-2xl" />, title: "High-Speed WiFi", description: "Uninterrupted internet access for studies and leisure" },
+    { icon: <FaUtensils className="text-2xl" />, title: "Quality Mess", description: "Nutritious and hygienic meals served daily" },
+    { icon: <FaBook className="text-2xl" />, title: "Study Areas", description: "Dedicated quiet spaces for academic work" },
+    { icon: <FaShieldAlt className="text-2xl" />, title: "24/7 Security", description: "Round-the-clock safety with CCTV surveillance" },
+    { icon: <FaTshirt className="text-2xl" />, title: "Laundry", description: "Regular laundry services for residents" },
+    { icon: <FaBed className="text-2xl" />, title: "Comfortable Rooms", description: "Spacious rooms with modern furniture" }
+  ];
 
   return (
-    <div className="flex items-center justify-center py-15  min-h-1/2"> {/* Centering the content */}
-            <div
-        className={`bg-white items-center justify-center rounded-2xl shadow-xl p-8 sm:p-10 md:p-12 lg:p-10 max-w-7xl text-gray-700 text-lg leading-relaxed transform transition-all duration-1000 ease-out
-        ${animate ? 'translate-x-0 scale-100 opacity-100' : '-translate-x-24 scale-90 opacity-0'}`}
-      >
-        <h2 className="text-3xl sm:text-4xl text-center font-bold mb-6 text-indigo-600 tracking-wide">
-          Hostel Overview
-        </h2>
-        <p className="tracking-normal text-[3vw] md:text-[1vw] sm:text-lg">
-          Malla Reddy University hostel is a home away from home for the students.
-          Separate Hostel Buildings for Girls & Boys are available. Malla Reddy University Hostels
-          have all the required facilities for the students to have a comfortable stay and a family
-          atmosphere. It aims at ensuring harmonious, friendly living among students from various
-          places, inculcating self-discipline. The hostel serves as a training ground for a responsible,
-          successful, and useful life through the development of the body, mind, and soul. It is a walled
-          campus hostel with a single entry and 24-hour security.
-        </p>
+    <section className="py-16 rounded-3xl bg-white">
+      <div className="container px-6 mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={container}
+          className="max-w-6xl px-8 py-12 mx-auto bg-white rounded-2xl shadow-lg"
+        >
+          <motion.h2 
+            variants={item}
+            className="mb-4 text-3xl  font-bold text-center text-indigo-600 sm:text-4xl md:mb-8"
+          >
+            Hostel Overview
+          </motion.h2>
+          
+          <motion.p 
+            variants={item}
+            className="max-w-7xl text-sm md:text-lg mx-auto mb-12 leading-relaxed text-center text-gray-600 "
+          >
+            Malla Reddy University hostel is a home away from home for our students. Our separate facilities for 
+            girls and boys provide all modern amenities in a secure, walled campus with single entry and 
+            24-hour security. We foster a family atmosphere that encourages self-discipline and holistic 
+            development of body, mind, and soul.
+          </motion.p>
+
+          <motion.div 
+            variants={container}
+            className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {features.map((feature, index) => (
+              <motion.div
+                key={index}
+                variants={item}
+                whileHover={{ y: -5 }}
+                className="p-6 transition-all  duration-300 bg-gray-50 rounded-xl hover:shadow-md"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="p-3 mr-4 text-white bg-indigo-500 rounded-full">
+                    {feature.icon}
+                  </div>
+                  <h3 className="text-md md:text-lg font-semibold text-gray-800">{feature.title}</h3>
+                </div>
+                <p className="text-sm md:text-lg text-gray-600">{feature.description}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

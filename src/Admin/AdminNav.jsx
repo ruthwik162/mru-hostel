@@ -37,7 +37,7 @@ const AdminNav = () => {
         const fetchUser = async () => {
             const storedUser = JSON.parse(localStorage.getItem("user")) || JSON.parse(sessionStorage.getItem("user"));
             const email = storedUser?.email;
-    
+
             if (!user && email) {
                 try {
                     const res = await fetch(`http://localhost:8087/user/profile?email=${email}`);
@@ -50,7 +50,7 @@ const AdminNav = () => {
         };
         fetchUser();
     }, [user, setUser]);
-    
+
 
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -66,40 +66,41 @@ const AdminNav = () => {
                 <img className="h-15 rounded w-22" src={assets.mrulogo} alt="logo" />
             </NavLink>
 
-            <h1 onClick={() => navigate("/")} className="text-2xl cursor-pointer sm:text-2xl md:text-2xl md:gap-6 font-bold max-w-2xl text-white">
+            {/* <h1 onClick={() => navigate("/")} className="text-2xl cursor-pointer sm:text-2xl md:text-2xl md:gap-6 font-bold max-w-2xl text-white">
                 MallaReddy University
-            </h1>
+            </h1> */}
 
             {/* Desktop Nav */}
             <div className="hidden md:flex items-center gap-4 lg:gap-8">
                 {navLinks.map((link, i) => (
-                    <NavLink key={i} to={link.path} className={`group flex flex-col gap-0.5 ${isScrolled ? "text-gray-700" : "text-white"}`}>
+                    <NavLink key={i} to={link.path} className={`group flex flex-col gap-0.5 ${isScrolled ? "text-gray-700" : "text-black"}`}>
                         {link.name}
-                        <div className={`${isScrolled ? "bg-gray-700" : "bg-white"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
+                        <div className={`${isScrolled ? "bg-gray-700" : "bg-black"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
                     </NavLink>
                 ))}
             </div>
 
             {/* Desktop Right */}
             <div className="hidden md:flex items-center gap-4">
-            <button
-                        onClick={() => navigate("/")}
-                        className="cursor-pointer px-8 py-2 bg-indigo-500 hover:bg-primary-dull transition text-white rounded-full"
-                    >
-                        Home
-                    </button>
-            <div className="relative group">
-                        <img
-                            src={user?.profileimage || assets.profile_icon}
-                            alt="profile"
-                            className="w-10 h-10 rounded-full object-cover "
-                        />
-                        <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40">
-                            <li onClick={logout} className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
-                                Logout
-                            </li>
-                        </ul>
-                    </div>
+                <button
+                    onClick={() => navigate("/")}
+                    className="cursor-pointer px-6 py-1.5 bg-indigo-600 hover:bg-indigo-700 transition text-white rounded-full text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    aria-label="Admin dashboard"
+                >
+                    Home
+                </button>
+                <div className="relative group">
+                    <img
+                        src={user?.profileimage || assets.profile_icon}
+                        alt="profile"
+                        className="w-10 h-10 rounded-full object-cover "
+                    />
+                    <ul className="hidden group-hover:block absolute top-10 right-0 bg-white shadow border border-gray-200 py-2.5 w-30 rounded-md text-sm z-40">
+                        <li onClick={logout} className="p-1.5 pl-3 hover:bg-primary/10 cursor-pointer">
+                            Logout
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -131,8 +132,8 @@ const AdminNav = () => {
                 </button>
 
                 <button onClick={logout} className="cursor-pointer px-6 py-2 mt-2 bg-indigo-500 hover:bg-indigo-400 transition text-white rounded-full text-sm">
-                        Logout
-                    </button>
+                    Logout
+                </button>
             </div>
         </nav>
     );

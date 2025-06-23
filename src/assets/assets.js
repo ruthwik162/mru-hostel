@@ -49,9 +49,12 @@ import hoste_girls from './hoste_girls.png'
 import hostel_boys from './hostel_boys.png';
 import delete_icon from './delete.png' 
 import edit from './edit.png'
-
+import welcome from './welcome.png'
+import mrulogo_login from './mrulogo_login.png'
 
 export const assets = {
+    mrulogo_login,
+    welcome,
     edit,
     delete_icon,
     hostel_boys,

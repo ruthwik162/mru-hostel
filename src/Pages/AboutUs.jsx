@@ -4,7 +4,7 @@ import HostelImages from '../Components/HostelImages';
 
 const AboutUs = () => {
   return (
-    <div className='bg-indigo-300'>
+    <div className='relative min-h-screen py-30 bg-gray-50 overflow-hidden'>
       <HostelImages/>
         <AboutCard/>
     </div>

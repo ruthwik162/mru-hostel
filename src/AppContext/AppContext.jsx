@@ -28,7 +28,7 @@ export const AppContextProvider = ({ children }) => {
     try {
       await axios.post("http://localhost:8087/user/register", formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
       });
       toast.success("Registration successful! Please log in.");

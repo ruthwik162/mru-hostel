@@ -1,14 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../AppContext/AppContext';
+import { motion } from 'framer-motion';
+import { assets } from '../assets/assets';
 
 const Hero = () => {
   const { navigate, setShowUserLogin, user } = useAppContext();
-  const [animate, setAnimate] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setAnimate(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+  const containerVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.2,
+        duration: 0.6,
+        when: "beforeChildren",
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1, 
+      y: 0, 
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut"
+      }
+    }
+  };
 
   const handleNavigation = () => {
     if (!user) {
@@ -19,52 +42,118 @@ const Hero = () => {
   };
 
   return (
-    <div className='flex flex-col md:py-10 py-20 text-white p-30 justify-center items-start px-6 md:px-6 lg:px-24 xl:px-34 bg-[url("/src/assets/heroMru.jpg")] bg-cover bg-no-repeat w-screen h-screen'>
-      <div className={`h-[580px] w-full max-w-5xl mx-auto transition-all duration-1000 ease-out 
-          ${animate ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} 
-          flex flex-col items-center border-2 rounded-2xl bg-orange-500/85 justify-center px-4 text-center`}
+    <div className="relative flex flex-col items-center justify-center w-full min-h-screen py-30 text-white bg-white bg-cover bg-center bg-no-repeat">
+      {/* Enhanced gradient overlay */}
+      <div className="absolute top-0 left-0 w-full h-100 bg-gradient-to-br from-indigo-600/90 via-indigo-700/80 to-indigo-800/70"></div>
+
+      <motion.div
+        className="relative z-10 w-full max-w-7xl px-6 mx-auto"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
       >
-        <div className="flex flex-row items-center justify-center gap-2.5 mb-6 border border-white-500/30 rounded-full bg-gray-300/15 pl-4 p-1 text-[1w]  text-white-800 max-w-full z-0">
-          <p>Launching our new platform update.</p>
-          <div className="flex items-center cursor-pointer gap-2 bg-indigo-400 border border-gray-500/30 rounded-2xl px-3 py-1 whitespace-nowrap">
-            <p>Explore</p>
-            <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 4.5h10.182m-4-3.5 4 3.5-4 3.5" stroke="#6B7280" strokeWidth="1.5"
-                strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+        <motion.div
+          className="flex flex-col md:flex-row items-center justify-between w-full p-8 bg-orange-700/90 rounded-2xl backdrop-blur-sm shadow-2xl border border-indigo-500/30"
+          variants={itemVariants}
+        >
+          <div className="md:w-1/2 mb-8 md:mb-0">
+            <img 
+              src={assets.welcome} 
+              className='h-auto w-full max-w-md mx-auto transform hover:scale-105 transition-transform duration-500' 
+              alt="Welcome to MRU Hostels" 
+            />
           </div>
-        </div>
+          
+          <div className="md:w-1/2 md:pl-8">
+            {/* Enhanced Badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium text-white transition-all duration-300 bg-indigo-800/70 rounded-full hover:bg-indigo-900/80 shadow-md"
+              whileHover={{ scale: 1.05 }}
+              variants={itemVariants}
+            >
+              <span className="text-indigo-100">New platform update available</span>
+              <div className="flex items-center gap-1 px-3 py-1 bg-indigo-400 rounded-full">
+                <span>Explore</span>
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
+                  <path
+                    d="M1 4.5h10.182m-4-3.5 4 3.5-4 3.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+            </motion.div>
 
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-bold max-w-4xl text-white-800">
-          Malla Reddy University <br /> Hostels
-        </h1>
-        <p className="max-w-xl text-center mt-6 px-4">
-          Unlock potential with tailored strategies designed for success. Simplify challenges, maximize results,
-          and stay ahead in the competitive market.
-        </p>
+            {/* Enhanced Title */}
+            <motion.h1
+              className="mb-6 text-4xl w-full  font-bold leading-tight text-center sm:text-5xl md:text-5xl lg:text-4xl bg-gradient-to-r from-white to-indigo-100 bg-clip-text text-transparent"
+              variants={itemVariants}
+            >
+              Malla Reddy University <br className="hidden sm:block" /> Hostel 
+            </motion.h1>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6">
-          <button
-            onClick={handleNavigation}
-            type="button"
-            className="w-40 py-3 active:scale-95 cursor-pointer transition text-sm text-white rounded-lg bg-indigo-500 hover:bg-indigo-600"
-          >
-            <p className="mb-0.5">Join Now</p>
-          </button>
+            {/* Enhanced Description */}
+            <motion.p
+              className="max-w-2xl mx-auto mb-8 text-lg text-center md:text-xl text-indigo-100"
+              variants={itemVariants}
+            >
+              Premium accommodation with modern amenities, fostering a supportive environment for academic excellence and personal growth.
+            </motion.p>
 
-          <button
-            onClick={() => navigate("/about")}
-            className="group px-7 py-2.5 active:scale-95 flex items-center gap-2 font-medium border border-white rounded-lg hover:bg-white/10"
-          >
-            Learn more
-            <svg className="group-hover:translate-x-1 transition pt-0.5" width="12" height="9"
-              viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 4.5h10.182m-4-3.5 4 3.5-4 3.5" stroke="#ffffff" strokeWidth="1.5"
-                strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
-      </div>
+            {/* Enhanced Buttons */}
+            <motion.div
+              className="flex flex-col gap-4 sm:flex-row justify-center"
+              variants={itemVariants}
+            >
+              <button
+                onClick={handleNavigation}
+                className="relative px-8 py-3 font-medium text-white transition-all duration-300 transform bg-indigo-600 rounded-lg hover:bg-indigo-700 hover:scale-105 active:scale-95 shadow-lg overflow-hidden group"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <span className="relative z-10 flex items-center">
+                  {user ? 'Book Now' : 'Join Now'}
+                  {isHovered && (
+                    <motion.span
+                      className="inline-block ml-2"
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ repeat: Infinity, duration: 1.5 }}
+                    >
+                      →
+                    </motion.span>
+                  )}
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </button>
+
+              <button
+                onClick={() => navigate("/about")}
+                className="flex items-center justify-center gap-2 px-8 py-3 font-medium text-white transition-all duration-300 border-2 border-indigo-300 rounded-lg hover:bg-indigo-500/20 hover:scale-105 active:scale-95 hover:border-indigo-400 shadow-md"
+              >
+                Learn more
+                <motion.svg
+                  width="12"
+                  height="9"
+                  viewBox="0 0 12 9"
+                  className="mt-1"
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.5 }}
+                >
+                  <path
+                    d="M1 4.5h10.182m-4-3.5 4 3.5-4 3.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </motion.svg>
+              </button>
+            </motion.div>
+          </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

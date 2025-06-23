@@ -1,10 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import {
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer
+} from 'recharts';
 import { motion } from 'framer-motion';
+import { FaMale, FaFemale, FaUtensils, FaIceCream } from 'react-icons/fa';
+import { FaBowlRice } from 'react-icons/fa6'; // ✅ Updated icon
 
 const Reports = () => {
   const [students, setStudents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [timeRange, setTimeRange] = useState('daily');
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -14,6 +30,8 @@ const Reports = () => {
         setStudents(filteredStudents);
       } catch (err) {
         console.error('Error fetching students:', err);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -23,24 +41,41 @@ const Reports = () => {
   const boys = students.filter(student => student.gender?.toLowerCase() === 'male');
   const girls = students.filter(student => student.gender?.toLowerCase() === 'female');
 
-  const riceForBoys = boys.length * 400;
-  const curryForBoys = boys.length * 100;
+  const getMultiplier = () => {
+    switch (timeRange) {
+      case 'daily':
+        return 1;
+      case 'weekly':
+        return 7;
+      case 'monthly':
+        return 30;
+      default:
+        return 1;
+    }
+  };
 
-  const riceForGirls = girls.length * 300;
-  const curryForGirls = girls.length * 100;
+  const multiplier = getMultiplier();
+  const riceForBoys = boys.length * 400 * multiplier;
+  const curryForBoys = boys.length * 100 * multiplier;
+  const riceForGirls = girls.length * 300 * multiplier;
+  const curryForGirls = girls.length * 100 * multiplier;
 
   const totalRice = riceForBoys + riceForGirls;
   const totalCurry = curryForBoys + curryForGirls;
-  const totalDesserts = students.length;
+  const totalDesserts = students.length * multiplier;
 
-  const toKg = (grams) => (grams / 1000).toFixed(2);
+  const toKg = grams => (grams / 1000).toFixed(2);
 
-  const data = [
-    { name: 'Boys', value: boys.length },
-    { name: 'Girls', value: girls.length }
+  const genderData = [
+    { name: 'Boys', value: boys.length, icon: <FaMale />, color: '#3b82f6' },
+    { name: 'Girls', value: girls.length, icon: <FaFemale />, color: '#ec4899' }
   ];
 
-  const COLORS = ['#8884d8', '#ff8884'];
+  const foodData = [
+    { name: 'Rice', boys: toKg(riceForBoys), girls: toKg(riceForGirls), total: toKg(totalRice) },
+    { name: 'Curry', boys: toKg(curryForBoys), girls: toKg(curryForGirls), total: toKg(totalCurry) },
+    { name: 'Desserts', boys: boys.length * multiplier, girls: girls.length * multiplier, total: totalDesserts }
+  ];
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 50 },
@@ -51,93 +86,186 @@ const Reports = () => {
     }
   };
 
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20 min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+      </div>
+    );
+  }
+
   return (
-    <div className="container mx-auto py-30 p-8 bg-[url('/src/assets/heroImage.png')] bg-cover bg-no-repeat max-w-full min-h-screen">
-      <h1 className="text-2xl items-center justify-center flex font-bold mb-4 text-indigo-700">
-        Cafeteria Requirement Report
-      </h1>
+    <div className="container mx-auto py-30 px-4 max-w-full  min-h-screen bg-gray-50">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="mb-8"
+      >
+        <h1 className="text-3xl font-bold text-center mb-2 text-indigo-700">Cafeteria Requirement Report</h1>
+        <p className="text-center text-gray-600 mb-6">Detailed analysis of food requirements based on student demographics</p>
 
-      <div className="flex flex-wrap justify-between mb-6">
-        {/* Boys vs Girls PieChart */}
-        <motion.div
-          className="w-full md:w-3/4 p-2"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <div className="bg-red-900/60 flex flex-col items-center justify-center rounded-2xl p-4 h-60 text-white text-lg font-semibold text-center">
-            <h2 className="text-xl font-semibold text-indigo-300 mb-2">Boys vs Girls</h2>
-            <PieChart width={250} height={200}>
-              <Pie
-                data={data}
-                cx="50%"
-                cy="50%"
-                outerRadius={60}
-                fill="#8884d8"
-                dataKey="value"
-                label
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex bg-white rounded-lg shadow-sm p-1">
+            {['daily', 'weekly', 'monthly'].map(range => (
+              <button
+                key={range}
+                onClick={() => setTimeRange(range)}
+                className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                  timeRange === range ? 'bg-indigo-600 text-white' : 'text-gray-700 hover:bg-gray-100'
+                }`}
               >
-                {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip />
-              <Legend verticalAlign="bottom" height={20} />
-            </PieChart>
+                {range.charAt(0).toUpperCase() + range.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8"
+      >
+        <motion.div variants={fadeInUp} className="bg-white rounded-xl shadow-md p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold text-gray-800">Gender Distribution</h2>
+            <div className="flex space-x-2">
+              <span className="flex items-center text-sm text-blue-500">
+                <FaMale className="mr-1" /> Boys: {boys.length}
+              </span>
+              <span className="flex items-center text-sm text-pink-500">
+                <FaFemale className="mr-1" /> Girls: {girls.length}
+              </span>
+            </div>
+          </div>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={genderData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={80}
+                  paddingAngle={5}
+                  dataKey="value"
+                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                >
+                  {genderData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={value => [`${value} students`, 'Count']} />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
           </div>
         </motion.div>
 
-        {/* Total Food Required */}
-        <motion.div
-          className="w-full md:w-1/4 p-2"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <div className="bg-red-900/60 flex flex-col items-center justify-center rounded-2xl p-4 h-60 text-white text-lg font-semibold text-center">
-            <h2 className="text-xl font-semibold text-indigo-300 mb-2">Total Food Required</h2>
-            <p>Total Rice: {toKg(totalRice)} kg</p>
-            <p>Total Curry: {toKg(totalCurry)} kg</p>
-            <p>Total Desserts: {totalDesserts}</p>
+        <motion.div variants={fadeInUp} className="bg-white rounded-xl shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4">
+            Total Food Requirements ({timeRange})
+          </h2>
+          <div className="grid grid-cols-3 gap-4 mb-6">
+            <div className="bg-blue-50 rounded-lg p-4 text-center">
+              <div className="flex justify-center text-blue-500 mb-2">
+                <FaBowlRice className="text-2xl" />
+              </div>
+              <h3 className="font-medium text-gray-700">Rice</h3>
+              <p className="text-2xl font-bold">{toKg(totalRice)} kg</p>
+            </div>
+            <div className="bg-green-50 rounded-lg p-4 text-center">
+              <div className="flex justify-center text-green-500 mb-2">
+                <FaUtensils className="text-2xl" />
+              </div>
+              <h3 className="font-medium text-gray-700">Curry</h3>
+              <p className="text-2xl font-bold">{toKg(totalCurry)} kg</p>
+            </div>
+            <div className="bg-purple-50 rounded-lg p-4 text-center">
+              <div className="flex justify-center text-purple-500 mb-2">
+                <FaIceCream className="text-2xl" />
+              </div>
+              <h3 className="font-medium text-gray-700">Desserts</h3>
+              <p className="text-2xl font-bold">{totalDesserts}</p>
+            </div>
+          </div>
+          <div className="h-64">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={foodData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="total" name="Total" fill="#8884d8" />
+                <Bar dataKey="boys" name="Boys" fill="#3b82f6" />
+                <Bar dataKey="girls" name="Girls" fill="#ec4899" />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
 
-      <div className="flex flex-wrap justify-between mb-6">
-        {/* Breakdown for Boys */}
-        <motion.div
-          className="w-full md:w-1/2 p-2"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <div className="bg-red-900/60 flex flex-col items-center justify-center rounded-2xl p-4 h-60 text-white text-lg font-semibold text-center">
-            <h2 className="text-lg font-semibold text-gray-800 mb-2">Breakdown (Boys)</h2>
-            <p>Rice: {toKg(riceForBoys)} kg</p>
-            <p>Curry: {toKg(curryForBoys)} kg</p>
-            <p>Desserts: {boys.length}</p>
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
+        <motion.div variants={fadeInUp} className="bg-white rounded-xl shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+            <FaMale className="text-blue-500 mr-2" /> Boys Requirements ({timeRange})
+          </h2>
+          <div className="space-y-4">
+            <div className="flex justify-between items-center bg-blue-50 rounded-lg p-4">
+              <span className="font-medium">Rice</span>
+              <span className="font-bold">{toKg(riceForBoys)} kg</span>
+            </div>
+            <div className="flex justify-between items-center bg-green-50 rounded-lg p-4">
+              <span className="font-medium">Curry</span>
+              <span className="font-bold">{toKg(curryForBoys)} kg</span>
+            </div>
+            <div className="flex justify-between items-center bg-purple-50 rounded-lg p-4">
+              <span className="font-medium">Desserts</span>
+              <span className="font-bold">{boys.length * multiplier}</span>
+            </div>
           </div>
         </motion.div>
 
-        {/* Breakdown for Girls */}
-        <motion.div
-          className="w-full md:w-1/2 p-2"
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <div className="bg-red-900/60 flex flex-col items-center justify-center rounded-2xl p-4 h-60 text-white text-lg font-semibold text-center">
-            <h2 className="text-lg font-semibold text-gray-800 mb-2">Breakdown (Girls)</h2>
-            <p>Rice: {toKg(riceForGirls)} kg</p>
-            <p>Curry: {toKg(curryForGirls)} kg</p>
-            <p>Desserts: {girls.length}</p>
+        <motion.div variants={fadeInUp} className="bg-white rounded-xl shadow-md p-6">
+          <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+            <FaFemale className="text-pink-500 mr-2" /> Girls Requirements ({timeRange})
+          </h2>
+          <div className="space-y-4">
+            <div className="flex justify-between items-center bg-pink-50 rounded-lg p-4">
+              <span className="font-medium">Rice</span>
+              <span className="font-bold">{toKg(riceForGirls)} kg</span>
+            </div>
+            <div className="flex justify-between items-center bg-green-50 rounded-lg p-4">
+              <span className="font-medium">Curry</span>
+              <span className="font-bold">{toKg(curryForGirls)} kg</span>
+            </div>
+            <div className="flex justify-between items-center bg-purple-50 rounded-lg p-4">
+              <span className="font-medium">Desserts</span>
+              <span className="font-bold">{girls.length * multiplier}</span>
+            </div>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 };
