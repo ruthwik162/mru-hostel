@@ -84,8 +84,8 @@ const AboutCard = () => {
   }
 
   return (
-    <section className="pt-10 bg-white">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section className="pt-10 md:px-10 px-2 bg-white">
+      <div className="container mx-auto px-4 max-w-9xl bg-gradient-to-r from-emerald-200 to-green-400 p-2 rounded-2xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

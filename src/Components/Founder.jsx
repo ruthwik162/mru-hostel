@@ -98,7 +98,7 @@ const Founder = () => {
                   <div className="md:w-1/3 relative">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 z-10"></div>
                     <img
-                      className="w-full h-full object-cover"
+                      className="w-full h-full bject-cover"
                       src={leader.image}
                       alt={leader.name}
                     />

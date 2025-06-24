@@ -23,8 +23,8 @@ const Hero = () => {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
-      opacity: 1, 
-      y: 0, 
+      opacity: 1,
+      y: 0,
       transition: {
         duration: 0.6,
         ease: "easeInOut"
@@ -41,36 +41,36 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center w-full min-h-screen py-30 text-white bg-white bg-cover bg-center bg-no-repeat">
+    <div className="relative flex md:px-10 flex-col items-center justify-center w-full min-h-screen pt-30 text-white bg-white bg-cover bg-center bg-no-repeat">
       {/* Enhanced gradient overlay */}
       <div className="absolute top-0 left-0 w-full h-100 bg-gradient-to-br from-indigo-600/90 via-indigo-700/80 to-indigo-800/70"></div>
 
       <motion.div
-        className="relative z-10 w-full max-w-7xl px-6 mx-auto"
+        className="relative z-10 w-full max-w-9xl px-3 mx-auto"
         initial="hidden"
         animate="visible"
         variants={containerVariants}
       >
         <motion.div
-          className="flex flex-col md:flex-row items-center justify-between w-full p-8 bg-orange-700/90 rounded-2xl backdrop-blur-sm shadow-2xl border border-indigo-500/30"
+          className="flex flex-col md:flex-row items-center justify-between w-full p-8 bg-gradient-to-r from-purple-400 to-pink-500 rounded-2xl backdrop-blur-sm shadow-2xl border border-indigo-500/30"
           variants={itemVariants}
         >
           <div className="md:w-1/2 mb-8 md:mb-0">
-            <img 
-              src={assets.welcome} 
-              className='h-auto w-full max-w-md mx-auto transform hover:scale-105 transition-transform duration-500' 
-              alt="Welcome to MRU Hostels" 
+            <img
+              src={assets.welcome}
+              className='h-auto w-full max-w-md mx-auto transform hover:scale-105 transition-transform duration-500'
+              alt="Welcome to MRU Hostels"
             />
           </div>
-          
+
           <div className="md:w-1/2 md:pl-8">
             {/* Enhanced Badge */}
             <motion.div
-              className="inline-flex items-center gap-2 px-30 py-2 mb-6 text-sm font-medium text-white transition-all justify-around duration-300 bg-indigo-800/70 rounded-full hover:bg-indigo-900/80 shadow-md"
+              className="flex items-center gap-2 w-full px-2  py-2 text-sm font-medium text-white transition-all justify-around duration-300 bg-indigo-800/70 rounded-full hover:bg-indigo-900/80 shadow-md"
               variants={itemVariants}
             >
-              <span className="text-indigo-100">New platform update available</span>
-              <div className="flex items-center gap-1 px-3 py-1 bg-indigo-400 rounded-full">
+              <span className="text-indigo-100 md:text-lg text-[3vw]">New platform update available</span>
+              <div className="flex items-center gap-1 md:px-5 px-2 py-1 bg-indigo-400 rounded-full">
                 <span>Explore</span>
                 <svg width="12" height="9" viewBox="0 0 12 9" fill="none">
                   <path
@@ -89,12 +89,12 @@ const Hero = () => {
               className="mb-6 text-4xl w-full  font-bold leading-tight text-center sm:text-5xl md:text-5xl lg:text-4xl bg-gradient-to-r from-white to-indigo-100 bg-clip-text text-transparent"
               variants={itemVariants}
             >
-              Malla Reddy University <br className="hidden sm:block" /> Hostel 
+              Malla Reddy University <br className="hidden sm:block" /> Hostel
             </motion.h1>
 
             {/* Enhanced Description */}
             <motion.p
-              className="max-w-2xl mx-auto mb-8 text-lg text-center md:text-xl text-indigo-100"
+              className="max-w-2xl mx-auto mb-8 text-sm text-center md:text-xl text-indigo-100"
               variants={itemVariants}
             >
               Premium accommodation with modern amenities, fostering a supportive environment for academic excellence and personal growth.
@@ -148,6 +148,14 @@ const Hero = () => {
                   />
                 </motion.svg>
               </button>
+              <div className="absolute -bottom-0 right-5 sm:bottom-8 sm:right-20 w-12 h-12 sm:w-24 sm:h-24 opacity-20">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
             </motion.div>
           </div>
         </motion.div>

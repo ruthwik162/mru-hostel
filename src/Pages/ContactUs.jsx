@@ -100,9 +100,9 @@ const ContactUs = () => {
   };
 
   return (
-    <section className="min-h-screen py-20 bg-gray-50">
+    <section className="min-h-screen pt-20 bg-gray-50">
       {/* Background gradient */}
-      <div className="absolute top-0 left-0 w-full h-80 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
+      <div className="absolute top-0 left-0 w-full h-120 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
 
       <motion.div
         className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-16"
@@ -132,7 +132,7 @@ const ContactUs = () => {
           {/* Girls Hostel Card */}
           <motion.div
             variants={itemVariants}
-            className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+            className="bg-gradient-to-r from-purple-400 to-pink-500 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
             <div className="p-8">
               <div className="flex items-center mb-6">
@@ -177,7 +177,7 @@ const ContactUs = () => {
           {/* Boys Hostel Card */}
           <motion.div
             variants={itemVariants}
-            className="bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+            className="bg-gradient-to-r from-blue-100 to-indigo-300 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
             <div className="p-8">
               <div className="flex items-center mb-6">
@@ -222,7 +222,7 @@ const ContactUs = () => {
           {/* General Contact Card */}
           <motion.div
             variants={itemVariants}
-            className="bg-indigo-600 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+            className="bg-gradient-to-r from-emerald-200 to-green-400 rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
             <div className="p-8 text-white">
               <h3 className="text-2xl font-semibold mb-6">General Contact</h3>
@@ -258,10 +258,10 @@ const ContactUs = () => {
           {/* Contact Form */}
           <motion.div
             variants={itemVariants}
-            className="bg-white rounded-xl shadow-xl overflow-hidden"
+            className="bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-xl shadow-xl overflow-hidden"
           >
             <div className="p-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send us a message</h3>
+              <h3 className="text-2xl font-bold  mb-6">Send us a message</h3>
 
               {submitted && (
                 <motion.div
@@ -275,7 +275,7 @@ const ContactUs = () => {
 
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                  <label className="block text-sm font-medium  mb-1">Full Name</label>
                   <input
                     name="name"
                     type="text"
@@ -288,7 +288,7 @@ const ContactUs = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                  <label className="block text-sm font-medium  mb-1">Email Address</label>
                   <input
                     name="email"
                     type="email"
@@ -301,7 +301,7 @@ const ContactUs = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
+                  <label className="block text-sm font-medium  mb-1">Your Message</label>
                   <textarea
                     name="message"
                     rows="5"

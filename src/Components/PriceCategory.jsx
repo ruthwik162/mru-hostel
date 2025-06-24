@@ -46,8 +46,8 @@ const WhyOurHostels = () => {
   ];
 
   return (
-    <section className="bg-white py-16">
-      <div className="container mx-auto px-4 max-w-4xl md:max-w-7xl">
+    <section className="bg-white px-3 md:px-10  py-16">
+      <div className="container mx-auto  p-5 bg-gradient-to-r flex flex-col items-center justify-center  from-indigo-100 to-indigo-300 rounded-2xl  max-w-9xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -55,7 +55,7 @@ const WhyOurHostels = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-indigo-100 text-indigo-700 mb-4">
+          <div className="inline-flex items-center px-4 py-1 rounded-full bg-indigo-100 text-indigo-700 mb-4">
             <FaStar className="mr-2 text-amber-500" />
             <span className="font-medium">Campus Living</span>
           </div>
@@ -67,7 +67,7 @@ const WhyOurHostels = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-1  mb-16">
+          <div className="flex flex-col md:flex-col justify-center bg-indigo-300 rounded-2xl py-1 px-2 w-full items-start ">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -75,7 +75,7 @@ const WhyOurHostels = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="flex items-start gap-6 p-4 md:px-60 hover:bg-gray-50 rounded-lg transition-colors"
+              className="flex items-start gap-6 p-4 md:px-55 justify-center rounded-lg transition-colors"
             >
               <div className="flex-shrink-0 mt-1">
                 {feature.icon}
@@ -95,15 +95,15 @@ const WhyOurHostels = () => {
           viewport={{ once: true }}
           className="x border-gray-200 pt-12"
         >
-          <div className="flex flex-col md:flex-col justify-center px-10 md:px-55 items-start gap-6">
+          <div className="flex flex-col md:flex-col justify-center px-10 md:px-55 items-start gap-6 bg-gradient-to-r from-emerald-200 to-green-400 p-10 rounded-2xl">
             <div className='flex  items-center gap-4 mb-6 md:mb-0'>
               <div className="flex-shrink-0 bg-indigo-100 p-3 rounded-full">
-              <FaMapMarkerAlt className="text-2xl text-indigo-600" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-800 mb-4">Prime Campus Location</h3>
+                <FaMapMarkerAlt className="text-2xl text-indigo-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Prime Campus Location</h3>
             </div>
 
-            <div>
+            <div className=''>
               <p className="text-gray-600 mb-4">
                 Our hostels are strategically located within walking distance to academic buildings,
                 libraries, and sports facilities. Enjoy the convenience of campus life with 24/7 access

@@ -25,9 +25,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isImageUploading, setIsImageUploading] = useState(false);
-  const [showPasswordFields, setShowPasswordFields] = useState(false);
-  const [showCurrentPassword, setShowCurrentPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
+
 
   const [userData, setUserData] = useState({
     username: '',
@@ -38,11 +36,7 @@ const Profile = () => {
     socialLinks: { twitter: '', linkedin: '', github: '' },
   });
 
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-  });
+
 
   const fetchUserData = useCallback(async () => {
     const storedUser = localStorage.getItem('user');

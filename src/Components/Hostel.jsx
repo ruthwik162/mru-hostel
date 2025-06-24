@@ -32,14 +32,14 @@ const Hostel = () => {
   ];
 
   return (
-    <section className="py-16 rounded-3xl bg-white">
-      <div className="container px-6 mx-auto">
+    <section className="py-5 ">
+      <div className="container  mx-auto">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={container}
-          className="max-w-6xl px-8 py-12 mx-auto bg-white rounded-2xl shadow-lg"
+          className="max-w-9xl px-5 py-12  mx-auto bg-gradient-to-r from-blue-100 to-indigo-300 rounded-2xl shadow-lg"
         >
           <motion.h2 
             variants={item}
@@ -60,7 +60,7 @@ const Hostel = () => {
 
           <motion.div 
             variants={container}
-            className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
           >
             {features.map((feature, index) => (
               <motion.div
