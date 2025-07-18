@@ -197,7 +197,7 @@ const LoggedInfo = () => {
   const deleteMessage = async (id) => {
     if (!window.confirm('Are you sure you want to delete this message?')) return;
     try {
-      await axios.delete(`http://localhost:8087/user/contactus/${id}`);
+      await axios.delete(`http://localhost:8087/user/contactus/${id}`,);
       setMessages((prev) => prev.filter((msg) => msg.id !== id));
       toast.success('Message deleted successfully');
     } catch {
@@ -206,7 +206,7 @@ const LoggedInfo = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white py-8 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-8  sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.h1
           className="text-3xl font-bold text-gray-900 mb-8 text-center"

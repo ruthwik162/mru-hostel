@@ -105,7 +105,7 @@ const Reports = () => {
   }
 
   return (
-    <div className="container mx-auto py-30 px-4 max-w-full  min-h-screen bg-gray-50">
+    <div className="container mx-auto py-30 px-4 max-w-full  min-h-screen bg-gradient-to-r from-pink-600 to-purple-700 ">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
