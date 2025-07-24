@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useAppContext } from "../AppContext/AppContext";
 import { assets } from "../assets/assets";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const Navbar = () => {
@@ -123,6 +123,8 @@ const Navbar = () => {
                         />
                     </NavLink>
                 ))}
+
+                {user ? (<Link to='/orderdetails'>Order Details</Link>) : (null)}
             </div>
 
             {/* Desktop Right */}
@@ -179,6 +181,16 @@ const Navbar = () => {
                                 </li>
                                 <li
                                     onClick={() => {
+                                        navigate("/orderdetails");
+                                    }}
+                                    className="p-2 pl-3 flex gap-2 hover:bg-indigo-50 cursor-pointer text-gray-700"
+                                    role="menuitem"
+                                >
+                                    <span>Orders</span>
+                                    <img className="w-4 h-4" src={assets.edit} alt="" aria-hidden="true" />
+                                </li>
+                                <li
+                                    onClick={() => {
                                         logout();
                                         setIsProfileDropdownOpen(false);
                                     }}
@@ -212,7 +224,7 @@ const Navbar = () => {
                         Logout
                     </button>
                 )}
-                
+
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
                     className="focus:outline-none"
@@ -241,7 +253,7 @@ const Navbar = () => {
                 aria-hidden={!isMenuOpen}
             >
 
-                
+
                 <button
                     className="absolute top-6 right-6 focus:outline-none"
                     onClick={() => setIsMenuOpen(false)}
@@ -276,6 +288,8 @@ const Navbar = () => {
                         Admin
                     </button>
                 )}
+                {user ? (<Link to='/orderdetails'>Order Details</Link>) : (null)}
+
 
 
                 {user ? (

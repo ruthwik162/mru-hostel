@@ -117,7 +117,7 @@ const LoggedInfo = () => {
     const fetchUsers = async () => {
       try {
         const res = await axios.get('http://localhost:8087/user/all');
-        const filteredStudents = res.data.filter((user) => user.role !== 'admin');
+        const filteredStudents = res.data.filter((user) => user.role !== 'admin' && user.roomId );
         setStudents(filteredStudents);
       } catch (error) {
         toast.error('Failed to fetch users');
@@ -131,7 +131,7 @@ const LoggedInfo = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const res = await axios.get('http://localhost:8087/user/contactus/all');
+        const res = await axios.get('http://localhost:8087/user/contactus');
         setMessages(res.data);
       } catch (error) {
         toast.error('Failed to fetch messages');
@@ -340,7 +340,7 @@ const LoggedInfo = () => {
           <div className="p-6">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">Hostel Blocks</h2>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              {['Girls-1', 'Girls-2', 'Boys-1', 'Boys-2'].map((block) => (
+              {['mruhG1', 'mruhG2', 'mruhB1', 'mruhB2'].map((block) => (
                 <Link to={`/adminhome/${block}`} key={block}>
                   <motion.div
                     className="p-4 bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center justify-center"

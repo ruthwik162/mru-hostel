@@ -26,7 +26,7 @@ const Reports = () => {
     const fetchUsers = async () => {
       try {
         const res = await axios.get('http://localhost:8087/user/all');
-        const filteredStudents = res.data.filter(user => user.role !== 'admin');
+        const filteredStudents = res.data.filter(user => user.role !== 'admin' && user.roomId);
         setStudents(filteredStudents);
       } catch (err) {
         console.error('Error fetching students:', err);

@@ -261,7 +261,7 @@ const PlanDetails = () => {
     <AnimatePresence>
       <section className="relative min-h-screen py-20 bg-gray-50 overflow-hidden">
         {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
+      <div className="absolute top-0 left-0 w-full h-120 rounded-b-xl bg-gradient-to-br from-indigo-600/90 via-indigo-700/80 to-indigo-800/70"></div>
 
         <div className="relative max-w-7xl max-h-5xl z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <motion.div
@@ -270,25 +270,26 @@ const PlanDetails = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <button
-              onClick={() => navigate(-1)}
-              className="flex items-center text-white hover:text-indigo-200 mb-8 transition"
-            >
-              <FiArrowLeft className="mr-2" /> Back to Plans
-            </button>
+            
 
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">{room.name} Plan Details</h2>
             <p className="text-lg text-indigo-100 max-w-2xl mx-auto">
               Everything you need to know about our {room.name.toLowerCase()} accommodation
             </p>
           </motion.div>
-
+          <button
+              onClick={() => navigate(-1)}
+              className="flex items-center text-white cursor-pointer border-2 p-3 rounded-2xl hover:text-indigo-200 mb-8 transition"
+            >
+              <FiArrowLeft className="mr-2" /> Back to Plans
+            </button>
           <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeUp}
             className="bg-white rounded-2xl shadow-xl overflow-hidden"
           >
+            
             <div className="md:flex">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}

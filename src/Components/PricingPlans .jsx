@@ -81,8 +81,8 @@ const PricingPlans = () => {
   }
 
   return (
-    <section className="relative min-h-screen py-30 bg-gray-50 overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
+    <section className="relative min-h-screen py-30  overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-120 rounded-b-xl bg-gradient-to-b from-indigo-600 to-indigo-500"></div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
